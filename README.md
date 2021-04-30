@@ -52,9 +52,17 @@ descendants:
 2. App should pass a **callback** prop, `onChangeType`, to `<Filters />`. This
    callback needs to update `<App />`'s `state.filters.type`
 
+<!-- onChangeType to update filter type on app -->
+   <Filters onChangeType={this.onChangeType} >
+
+   <!-- DONE -->
+
 3. `<Filters />` needs a **callback** prop, `onFindPetsClick`. When the
    `<Filters />` component calls `onFindPetsClick`, `<App />` should fetch a
    list of pets using `fetch()`.
+
+<!-- onFindPetsClick to make fetch when called from Filters -->
+   <Filters onChangeType={this.onChangeType}  onFindPetsClick={this.onFindPetsClick} >
 
   - Assuming your app is up and running, you can make a fetch to this exact URL:
     `/api/pets` with an **optional query parameter** to get your data.
@@ -65,9 +73,24 @@ descendants:
   - The pet data received will include information on individual pets and their
     adoption status.
 
+    state = { 
+      filter: {
+        type: 'all'
+      }
+    }
+<!-- going to change baseUrl dependant on state.filter.type -->
+    const baseUrl = '/api/pets'
+
 4. Set `<App/>`'s `state.pets` with the results of your fetch request so
     you can pass the pet data down as props to `<PetBrowser />`
 
+    state = { 
+      pets: ,
+      filter: {
+        type: 'all'
+      }
+    }
+<PetBrowser pets={this.state.pets} />
   - **Even though we're using `fetch` here, its responses have been mocked in
     order to make the tests work properly. That means it's important to use the
     _exact_ URLs as described above, or your tests will fail!**
@@ -75,6 +98,10 @@ descendants:
 5. Finally, App should pass a **callback** prop, `onAdoptPet`, to `<PetBrowser
    />`. This callback should take in an id for a pet, find the matching pet in
    `state.pets` and set the `isAdopted` property to `true`.
+<!-- This callback should take in an id for a pet, DONE  -->
+<!-- find the matching pet in `state.pets` -->
+<!-- and set the `isAdopted` property to `true`. -->
+   <PetBrowser onAdoptPet={this.onAdoptPet} >
 
 ### `Filters`
 
